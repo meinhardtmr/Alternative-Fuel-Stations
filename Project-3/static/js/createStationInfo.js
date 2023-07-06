@@ -7,13 +7,14 @@ function createStationInfo(value){
   } else{    
     logging ? console.log('createStationInfo: ', value, stations.find(o => o.properties.id == value).properties.id) : null;
   
-    let str = `<p>id: ${stations.find(o => o.properties.id == value).properties.id}</p>
-              <p>Station Name: ${stations.find(o => o.properties.id == value).properties.station_name}</p>`;
-            //<p>gender: ${samples.find(o => o.properties.id == value).gender}</p>
-            //<p>age: ${samples.find(o => o.properties.id == value).age}</p>
-            //<p>location: ${samples.find(o => o.properties.id == value).location}</p>
-            //<p>bbtype: ${samples.find(o => o.properties.id == value).bbtype}</p>
-            //<p>wfreq: ${samples.find(o => o.properties.id == value).wfreq}</p>`;
+    let str = `<p class="p1">Station ID: ${stations.find(o => o.properties.id == value).properties.id}</p>
+               <p class="p1">Station Name: ${stations.find(o => o.properties.id == value).properties.station_name}</p>
+               <p class="p1">Street Address: ${stations.find(o => o.properties.id == value).properties.street_address}</p>
+               <p class="p1">City: ${stations.find(o => o.properties.id == value).properties.city}</p>
+               <p class="p1">State: ${stations.find(o => o.properties.id == value).properties.state}</p>
+               <p class="p1">Zip Code: ${stations.find(o => o.properties.id == value).properties.zip}</p>
+               <p class="p1">Phone Number: ${stations.find(o => o.properties.id == value).properties.station_phone}</p>
+               <p class="p1">Fuel Type: ${stations.find(o => o.properties.id == value).properties.fuel_type_desc}</p>`;
     
     document.getElementById("stations-metadata").innerHTML = str; 
   }
