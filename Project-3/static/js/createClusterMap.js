@@ -64,7 +64,7 @@ function createClusterMap(data) {
     };
 
     // Modify the map so that it has the street map and the "All Fuel Types" layer
-    map = L.map("map", {
+    map = L.map("myMap", {
         center: [27.794402, -83.70254],
         zoom: 7.00,
         layers: [street, allFuelTypesGroup] // Initially display all fuel types
