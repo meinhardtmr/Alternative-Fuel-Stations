@@ -1,12 +1,15 @@
+function createClusterMap(value){
+    console.log('createClusterMap');
+    
 // Place url in a constant variable
 let url = "https://developer.nrel.gov/api/alt-fuel-stations/v1.geojson?api_key=DEMO_KEY&&state=FL&&access=public";
 
-let map;
+map.remove();
 
 let validZipCodes = [];
 
 // Function to create the cluster map
-function createClusterMap(data) {
+function createMap(data) {
     // Create an object to hold the created marker cluster groups
     let clusterGroups = {};
     let allFuelTypesGroup = L.markerClusterGroup(); // Create a marker cluster group for all fuel types
@@ -32,6 +35,10 @@ function createClusterMap(data) {
             `;
 
             marker.bindPopup(popupContent); // Bind the popup to the marker
+            marker.on('click', function(e){
+               ele.innerHTML = ele.innerHTML + '<option value="' + data.features[i].properties.id + '">' + data.features[i].properties.id + '</option>';
+               ele.value = data.features[i].properties.id;
+               ele.onchange();});
 
             // Add the marker to the fuel type cluster group
             if (clusterGroups[fuelType]) {
@@ -66,7 +73,7 @@ function createClusterMap(data) {
     // Modify the map so that it has the street map and the "All Fuel Types" layer
     map = L.map("myMap", {
         center: [27.794402, -83.70254],
-        zoom: 7.00,
+        zoom: zoom,
         layers: [street, allFuelTypesGroup] // Initially display all fuel types
     });
 
@@ -75,6 +82,8 @@ function createClusterMap(data) {
 
     // Call the getValidZipCodes function to retrieve the valid zip codes
     getValidZipCodes(data);
+    
+    //map.addLayer(allFuelTypesGroup);
 }
 
 // Function to zoom into the map
@@ -184,7 +193,9 @@ function optionChanged(zipCode) {
 // Function to initialize the application
 async function init() {
     let data = await d3.json(url); // Fetch the JSON data and wait for it to be retrieved
-    createClusterMap(data); // Create the cluster map
+    console.log('data', data)
+    createMap(data); // Create the cluster map
 }    
 // Call the initialize function
 init();
+}

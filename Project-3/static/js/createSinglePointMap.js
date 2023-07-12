@@ -3,9 +3,6 @@
 function createSinglePointMap(value){
   logging ? console.log('createSinglePointMap: ', value) : null ;
   
-  //let lat = 28.5384;
-  //let lon = -81.3789;
-  
   // Remove current map. This is needed for selecting new Station ID's
   spMap.remove();
 
@@ -19,24 +16,15 @@ function createSinglePointMap(value){
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(spMap);
 
-console.log('Sp-map', stations.find(o => o.properties.id == value));
-
   if(value != 'ALL'){
-    //const lat = stations.find(o => o.properties.id == value).geometry.coordinates[1];
-    //const lon = stations.find(o => o.properties.id == value).geometry.coordinates[0];
-    //const marker = new L.marker([lat, lon]).on('mouseover', markerMouseOver);
+    const s = stations.find(o => o.properties.id == value);
+    const lat = s.geometry.coordinates[1];
+    const lng = s.geometry.coordinates[0];
+    
+    //Center map and zoom in
+    spMap.setView(new L.LatLng(lat, lng), zoom+6);
 
-    //function markerMouseOver(e){
-      //e.target.bindPopup(marker.station_name).openPopup();
-    //  e.target.bindPopup(feature.properties.id).openPopup();
-    //};
- 
-    // Add marker to map
-    //marker.station_name = stations.find(o => o.properties.id == value).properties.station_name;
-    //marker.addTo(spMap);
-//    L.geoJSON(stations.find(o => o.properties.id == value), 
-//       {onEachFeature : function (feature, layer)
-//          {label = feature.properties.station_name;}}).addTo(spMap).bindTooltip(label).openTooltip();  
+    L.geoJSON(s).addTo(spMap).bindTooltip(s.properties.station_name,{direction:'top'}).openTooltip();  
 
   }
   

@@ -8,8 +8,13 @@ function createStationInfo(value){
     logging ? console.log('createStationInfo: ', value, stations.find(o => o.properties.id == value).properties.id) : null;
     
     const s = stations.find(o => o.properties.id == value);
-        const str = `<p class="p1"><b>Station ID:</b> ${s.properties.id}</p>
-                     <p class="p1"><b>Station Name:</b> ${s.properties.station_name}</p>
+    
+    let str = `<p class="p1"><b>Station Number:</b> ${s.properties.id}</p>
+               <p class="p1"><b>Facility Type:</b>`
+               if(s.properties.facility_desc){
+                 str = str + ` ${s.properties.facility_desc}</p>`;
+               }
+        str = str + `<p class="p1"><b>Station Name:</b> ${s.properties.station_name}</p>
                      <p class="p1"><b>Street Address:</b> ${s.properties.street_address}</p>
                      <p class="p1"><b>City:</b> ${s.properties.city}</p>
                      <p class="p1"><b>State:</b> ${s.properties.state}</p>
@@ -28,7 +33,7 @@ function createStationInfo(value){
         str2 = '<p class="p1"><b>Number of Dispensers:</b> ' + (s.properties.cng_dispenser_num) + '</p>';
       }
     else{
-        str2 = '<p class="p1"><b>Number of Dispensers:</b> Unknown</p>';
+        str2 = '<p class="p1"><b>Number of Dispensers:</b>Unknown</p>';
       }
     
     document.getElementById("stations-metadata").innerHTML = str + str2; 

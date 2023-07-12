@@ -1,5 +1,27 @@
 function createGauge(value){
   logging ? console.log('createGaugeChart: ', value) : null;
+  const s = stations.find(o => o.properties.id == value);
+  let title = '<b>Number of Dispensers</b>';
+  let num = 0;
+  let label = "9";
+
+  if (value !== 'ALL'){
+    if (s.properties.fuel_type_code == 'ELEC'){
+      title = '<b>Number of Chargers</b>';
+      num = (s.properties.ev_dc_fast_num + s.properties.ev_level1_evse_num + s.properties.ev_level2_evse_num);
+      if (num > 9){
+          num = 10;
+          label = "9+";
+      }
+    }
+    else if (s.properties.fuel_type_code == 'CNG'){
+      num = (s.properties.cng_dispenser_num);
+      if (num > 9){
+          num = 10;
+          label = "9+";
+      }
+    }
+  }
   
   let trace1 = {
     type: 'pie',
@@ -7,7 +29,7 @@ function createGauge(value){
     rotation: 90,
     hole: 0.5,
     values: [100/9, 100/9, 100/9, 100/9, 100/9, 100/9, 100/9, 100/9, 100/9, 100 ],
-    text: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
+    text: ["1", "2", "3", "4", "5", "6", "7", "8", label, ""],
     direction: "clockwise",
     textinfo: "text",
     textposition: "inside",
@@ -25,19 +47,14 @@ function createGauge(value){
   };
   
   //radius is the length of the dial
-  let radius = .15;
-  
-  //n is the number of units
-  //Needs logic to find number of units
-  //let n = stations.find(o => o.id == value).properties.??;
-  let n = 9;
-  
+  let radius = .25;
+   
   //theta is the angle in radians where 3.14159 is the equivalent of 180' 
   //as n approaches 9 theta approaches 0
-  let theta = 3.14159 - (3.14159 * (n/9));
+  let theta = 3.14159 - (3.14159 * (num/10));
 
   let layout = {
-    title: '<b>Number of pumps/outlets</b>',
+    title: title,
     shapes: [{type: "line",
               x0: .5,
               y0: .5,

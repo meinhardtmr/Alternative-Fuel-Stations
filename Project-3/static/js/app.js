@@ -8,15 +8,15 @@ const zoom = 6;
 
 let input = document.getElementById("search");
 search.addEventListener("keypress", function(event) {
-  // If the user presses the "Enter" key on the keyboard
-  if (event.key === "Enter") {
-    // Trigger the button element with a click
-    zbutton.click();
+  //If the user presses the "Enter" key on the keyboard
+    if (event.key === "Enter") {
+      //Trigger the button element with a click
+      zbutton.click();
   }
 });
 
 // Create initial cluster map object
-let myMap = L.map("map", {
+let map = L.map("myMap", {
         center: [lat, lon],
         zoom: zoom
       });
@@ -69,7 +69,7 @@ async function init(){
   console.log('init - end');
 
   // This will render the page once intialization is complete
-  optionChanged('ALL')  
+  optionChanged('ALL');  
   
   return;
 }
