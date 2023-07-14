@@ -1,4 +1,9 @@
 # Project-3
+#### Please note the following documents
+- Project-3-Proposal.docx: This document has the story and initial design of the dashboard
+- Project-3-Requirements.xlsx: This spreadsheet lists the requirements from the project and which component (file) meets the requirement
+
+## Instructions to get the application up and running
 ### Initial Data Load
 - Open a command propmt window and navigate to the ..\Project-3\Resources folder
   - There should be two files:
