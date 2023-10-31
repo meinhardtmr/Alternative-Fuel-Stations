@@ -5,7 +5,7 @@
 
 ## Instructions to get the application up and running
 ### Initial Data Load
-- Open a command propmt window and navigate to the ..\Project-3\Resources folder
+- Open a command prompt window and navigate to the ..\Project-3\Resources folder
   - There should be two files:
     - geo_alt_fuel_stations.json
     - load_mongo_db.bat
